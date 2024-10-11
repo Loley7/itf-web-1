@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="parent">
+
+    </div>
+    <h1 id = "username" style="text-align: center;">Username</h1>
+    <div id = "profile" style="display: block;margin-left: auto;margin-right: auto; position: relative; height: 300px; width: 300px; background-image: url(https://th.bing.com/th?id=OIF.D%2bCZLEmpqt%2bX1bHItNkraA&rs=1&pid=ImgDetMain); background-position: center; border-radius: 100%;background-size: cover;">
+        <div style="position: absolute;bottom: 0;right: 15px; height: 50px; width: 50px; background-color: red; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white;"><p>1</p></div>
+    </div>
+
+    <div style="text-align: center;">
+    <label for="">Set username</label>
+    <input type="text" placeholder="Enter" id ="input"><button onclick="setUsername()">Set</button>
+    <br>
+    <label for="">Set profile</label>
+    <input type="text" placeholder="Enter" id ="input2"><button onclick="setImage()">Set</button>
+    <br>
+    <input type="text" placeholder="Name" id ="input3"><input type="text" placeholder="Tel" id ="input4">
+    <button onclick="addParagraph()">Add</button>
+    <button onclick="saveCSV()">Export</button>
+    </div>
+
+    <script>
+        const username = document.getElementById("username");
+        const input = document.getElementById("input")
+        const input2 = document.getElementById("input2")
+        const input3 = document.getElementById("input3")
+        const input4 = document.getElementById("input4")
+        const profile = document.getElementById("profile")
+
+        username.textContent = "Hello";
+
+        function setUsername(){
+            username.textContent = input.value;
+            console.log(input.value);
+            input.value = '';
+        };
+        function setImage(){
+            profile.style.backgroundImage = "url("+ input2.value +")";
+            input.value = '';
+        };
+        function addParagraph(){
+            const a = document.createElement("p");
+            const b = document.createElement("d");
+            a.textContent = input3.value;
+            b.textContent = input4.value;
+            document.getElementById("parent").appendChild(a)
+            document.getElementById("parent").appendChild(b)
+        };
+        function saveCSV() {
+            const csvContent = phonenumber.map(row => row.join(",")).join("\n"); // Convert array to CSV string
+            const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+            const link = document.createElement("a");
+            const url = URL.createObjectURL(blob);
+            link.setAttribute("href", url);
+            link.setAttribute("download", "data.csv");
+            link.style.visibility = "hidden";
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        };
+    </script>
+</body>
+</html>
