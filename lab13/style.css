@@ -1,0 +1,31 @@
+*{
+    margin: 0;
+}
+.navbar{
+    background-color: coral;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    margin: 20px;
+    justify-content: space-between;
+}
+.nav-item{
+    font-size: xx-large;
+    color: rgb(82, 22, 248);
+    background-color: rgb(231, 160, 5);
+}
+.nav-item-container{
+    display: flex;
+    column-gap: 5px;
+}
+.image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 30%;
+    height: 30%;
+}
+.Info{
+    text-align: center;
+    border-style: double;
+}
