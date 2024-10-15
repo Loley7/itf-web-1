@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab14</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>
+            <a href="https://www.facebook.com/kritsakorn.pakdipong.9" class="username">Username</a>
+        </h1>
+        <br>
+        <div class="avatar">
+            <div class="notification">1</div>
+        </div>
+
+        <div class="input-group">
+            <label for="">Set username</label>
+            <input type="text" id="new-username" placeholder="Enter Username"><button onclick="updateUsername()">Set</button>
+            <br>
+            <label for="">Set the profile image URL</label>
+            <input type="text" id="new-avatar-url" placeholder="Enter Image URL"><button onclick="updateProfile()">Set</button>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="name" placeholder="Enter Name">
+            <input type="tel" id="phone" placeholder="Enter Phone Number">
+            <button onclick="addContact()">Add</button>
+            <button onclick="exportContacts()">Export</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Phone Number</th>
+                </tr>
+            </thead>
+            <tbody id="contact-list">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function updateProfile() {
+            var newAvatarUrl = document.getElementById("new-avatar-url").value;
+
+            if (newAvatarUrl) {
+                document.querySelector(".avatar").style.backgroundImage = `url(${newAvatarUrl})`;
+            }
+        }
+        function updateUsername() {
+            var newUsername = document.getElementById("new-username").value;
+
+            if (newUsername) {
+                document.querySelector(".username").textContent = newUsername;
+            }
+        }
+
+        const contacts = [];
+
+        function addContact() {
+            var name = document.getElementById("name").value;
+            var phone = document.getElementById("phone").value;
+
+            if (name && phone) {
+                contacts.push({ name, phone });
+                updateContactList();
+            }
+        }
+
+        function updateContactList() {
+            const contactList = document.getElementById('contact-list');
+            contactList.innerHTML = '';
+            contacts.forEach((contact, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${index + 1}</td><td>${contact.name}</td><td>${contact.phone}</td>`;
+                contactList.appendChild(row);
+            });
+        }
+
+        function exportContacts() {
+            var csvContent = "data:text/csv;charset=utf-8,Name,Phone\n";
+            contacts.forEach(function(contact) {
+                csvContent += `${contact.name},${contact.phone}\n`;
+            });
+
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "contacts.csv");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
